@@ -49,7 +49,7 @@ while True:
 			amount: float = float(input("Enter amount to withdraw: $"))
 
 			if accounts[index] - amount >= 0:
-				print(f"Account {index} Previous Balance: ${account[index]}")
+				print(f"Account {index} Previous Balance: ${accounts[index]}")
 				print(f"Account {index} New Balance: ${addToAccount(index, -amount)}")
 			else:
 				print("Sorry, insufficient funds.")
@@ -62,7 +62,7 @@ while True:
 				if accounts[i] <= 2000:
 					print(f"Account {i}: ${accounts[i]}")
 					count += 1
-			
+
 			print(f"Accounts with less than $2000: {count}")
 		case '5':
 			print("GENEROUS DONOR")
@@ -75,11 +75,13 @@ while True:
 			print("HACKAER ATTACK")
 
 			total: float = 0
-			
-			for account in accounts:
-				total += 0.05 * account
-				account *= 0.95
-			
+
+			# for account in accounts would create a copy of, not a reference to the account
+
+			for i in range(len(accounts)):
+				total += 0.05 * accounts[i]
+				accounts[i] *= 0.95
+
 			print(f"Total stolen is: ${total}")
 		case '7':
 			break
